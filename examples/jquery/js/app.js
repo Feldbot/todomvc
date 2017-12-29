@@ -70,7 +70,9 @@ jQuery(function ($) {
 			$('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
 			this.renderFooter();
 			$('#new-todo').focus();
-			util.store('todos-jquery', this.todos);
+			// Removed the util.store method here, since it's not a render function.
+      // Moved to getFilteredTodos() since that filters the todos rendered here.
+			// util.store('todos-jquery', this.todos);
 		},
 		renderFooter: function () {
 			var todoCount = this.todos.length;
@@ -111,6 +113,9 @@ jQuery(function ($) {
 			if (this.filter === 'completed') {
 				return this.getCompletedTodos();
 			}
+
+			// util.store moved here, good location for storing filtered todos
+      util.store('todos-jquery', this.todos)
 
 			return this.todos;
 		},
